@@ -1,0 +1,30 @@
+<html> 
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body> 
+<input type="range" id= "range00" min="0" max="11" value="7" step="1">
+
+<script> 
+
+document.body.onload = addElement;
+
+function addElement() {
+    var i = 0;
+    while (i<10){
+        var slider = document.createElement('input');
+        slider.id = "volume";
+        slider.type = 'range';
+        slider.min = 0;
+        slider.max = 1;
+        slider.value = 0.5;
+        slider.step = 0.1;
+        document.body.appendChild(slider);
+        i++
+    }
+}
+
+</script> 
+</body>
+</html>
