@@ -10,18 +10,48 @@
 
 document.body.onload = addElement;
 
-function addElement() {
-    var i = 0;
-    while (i<10){
+import * as fs from 'fs';
+const inputfile = fs.readFileSync('./example.txt', 'utf8');
+
+var globalMAX = 0;
+var globalMIN = 0;
+var data = [];
+
+
+class datapoint{
+    constructor(id,value){
+        this.id = id;
+        this.value = parseInt(value);
+    }
+
+    static createpoint(){
         var slider = document.createElement('input');
-        slider.id = "volume";
+        slider.id = "point";
         slider.type = 'range';
-        slider.min = 0;
-        slider.max = 1;
-        slider.value = 0.5;
+        slider.min = globalMIN;
+        slider.max = globalMAX;
+        slider.value = this.value;
         slider.step = 0.1;
         document.body.appendChild(slider);
         i++
+    }
+}
+
+function addElement() {
+    var weekqty = inputfile.split('\n').length;
+    var i = 0;
+    while (i < weekqty){
+        var value = parseInt(inputfile.split('\n')[i]);
+        console.log(value);
+        let point = new datapoint(i,value);
+        if (value < globalMIN) globalMIN = value;
+        if (value > globalMAX) globalMAX = value;
+        data.push(point);
+        i++;
+    }
+
+    for (let point of data) {
+        point.createpoint();
     }
 }
 
