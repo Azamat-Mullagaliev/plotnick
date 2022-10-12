@@ -3,16 +3,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body> 
-<input type="range" id= "range00" min="0" max="11" value="7" step="1">
+<body>
+    <div> <span id="val">t </span> </div>
+    <div> <span id="maxval">t </span> </div>
+    <div> <span id="minval">t </span> </div>
+    <input type="range" id= "range00" min="0" max="11" value="7" step="1">
 
 <script> 
 
-document.body.onload = addElement;
+//document.body.onload = addElement;
 
-import * as fs from 'fs';
+var fs = require("fs");
 const inputfile = fs.readFileSync('./example.txt', 'utf8');
-
+document.getElementById("val").innerHTML = inputfile.split('\n')[0];
+/*
 var globalMAX = 0;
 var globalMIN = 0;
 var data = [];
@@ -36,23 +40,24 @@ class datapoint{
         i++
     }
 }
-
+*/
 function addElement() {
-    var weekqty = inputfile.split('\n').length;
-    var i = 0;
+    //const weekqty = inputfile.split('\n').length;
+    //document.getElementById("val").innerHTML = inputfile.split('\n')[0];
+    /* var i = 0;
     while (i < weekqty){
         var value = parseInt(inputfile.split('\n')[i]);
-        console.log(value);
+        //document.getElementById("val").innerHTML = value;
         let point = new datapoint(i,value);
-        if (value < globalMIN) globalMIN = value;
-        if (value > globalMAX) globalMAX = value;
+        if (value < globalMIN) {globalMIN = value;  document.getElementById("minval").innerHTML = value;}
+        if (value > globalMAX) {globalMAX = value;  document.getElementById("maxval").innerHTML = value;}
         data.push(point);
         i++;
     }
 
     for (let point of data) {
         point.createpoint();
-    }
+    }*/
 }
 
 </script> 
